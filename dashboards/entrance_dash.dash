@@ -1,0 +1,178 @@
+#
+# Main arguments, all optional
+#
+title: Main Panel
+widget_dimensions: [121, 121]
+widget_size: [1, 1]
+widget_margins: [5, 5]
+columns: 9
+rows: 5
+global_parameters:
+    use_comma: 1
+    precision: 1
+    use_hass_icon: 1
+    namespace: default
+    devices:
+      media_player:
+        step: 5
+label:
+    widget_type: label
+    text: MIZRACHI
+    widget_style: $background_gray
+
+clock_widget:
+    widget_type: clock
+    widget_style: $background_gray
+
+gate_camera:
+    widget_type: camera
+    entity_picture: #LINK TO YOUR CAMERA FEED#
+    refresh: 10
+    
+commute:
+    widget_type: sensor
+    entity: sensor.commute_time_to_microsoft
+    title: 'זמן הגעה לעבודה'
+    widget_style: $background_lightpurple
+
+alarm:
+    widget_type: script
+    entity: script.activate_panic
+    title: 'הפעלת מצוקה'
+    widget_style: $background_red
+    icon_style_inactive: "color: white"
+    icon_style_active: "color: lightgray"
+
+gate:
+    widget_type: script
+    entity: script.open_gate_command
+    title: 'פתיחת השער'
+    widget_style: $background_yellow
+    icon_style_inactive: "color: white"
+    icon_style_active: "color: red"
+
+exit_light:
+    widget_type: script
+    entity: script.outdoor_exit_command
+    title: 'תאורת יציאה'
+    widget_style: $background_yellow
+    icon_style_inactive: "color: white"
+    icon_style_active: "color: red"
+
+light_kitchen:
+    widget_type: onofflight
+    entity_on: light.kitchen_main_light
+    entity_off: light.kitchen_lights
+    title: מטבח
+    widget_style: $background_blue
+
+light_livingroom:
+    widget_type: onofflight
+    entity_off: light.living_room_lights
+    entity_on: light.living_room_on_dashboard_group
+    title: 'סלון'
+    widget_style: $background_blue
+
+light_livingroom_wall:
+    widget_type: light
+    entity: light.living_room_wall_light
+    title: 'קיר סלון'
+    widget_style: $background_blue
+
+light_livingroom_projectors:
+    widget_type: light
+    entity: light.living_room_projectors
+    title: 'גשר סלון'
+    widget_style: $background_blue
+
+light_outdoor_front:
+    widget_type: onofflight
+    entity_on: light.outdoor_main_area
+    entity_off: light.outdoor_pool_area_lights
+    title: 'גינה אזור בריכה'
+    widget_style: $background_blue
+
+light_outdoor_pool:
+    widget_type: onofflight
+    entity_on: light.outdoor_on_lights
+    entity_off: light.outdoor_lights
+    title: 'גינה'
+    widget_style: $background_blue
+
+light_parents:
+    widget_type: onofflight
+    entity_on: light.parents_entrance_light
+    entity_off: light.parents_lights
+    title: 'חדר הורים'
+    widget_style: $background_blue
+
+light_upper_floor_ways:
+    widget_type: light
+    entity: light.upper_floor_bridge
+    title: 'קומה עליונה מעבר'
+    widget_style: $background_blue
+
+light_upper_floor_rooms:
+    widget_type: onofflight
+    entity_on: light.upper_floor_inbetween_rooms
+    entity_off: light.upper_floor_rooms_lights 
+    title: 'קומה עליונה חדרים'
+    widget_style: $background_blue
+
+light_upper_floor:
+    widget_type: onofflight
+    entity_on: light.upper_floor_bridge
+    entity_off: light.upper_floor_all_lights
+    title: 'קומה עליונה'
+    widget_style: $background_blue
+
+light_all:
+    widget_type: onofflight
+    entity_on: light.living_room_tv_light
+    entity_off: light.all_lights
+    title: 'כל הבית'
+    widget_style: $background_blue
+
+light_open_field:
+    widget_type: light
+    entity: light.open_field_projectors
+    title: 'שטח פתוח'
+    widget_style: $background_blue
+
+leds_open_field:
+    widget_type: light
+    entity: light.open_field_plants_light
+    title: 'לדים שטח פתוח'
+    widget_style: $background_blue
+
+myweather:
+    widget_type: weather
+    widget_style: $background_orange
+    title: Today
+    title_style: 'font-size: 22px;'
+    show_forecast: 1
+    prefer_icons: 1
+    forecast_title: Tomorrow
+    sensors:
+      icon: sensor.dark_sky_icon
+      temperature: sensor.dark_sky_temperature
+      apparent_temperature: 0
+      humidity: sensor.dark_sky_humidity
+      precip_probability: sensor.dark_sky_precip_probability
+      precip_intensity: 0
+      precip_type: sensor.dark_sky_precip
+      pressure: 0
+      wind_speed: 0
+      wind_bearing: 0
+      forecast_icon: sensor.dark_sky_icon_1
+      forecast_temperature_min: sensor.dark_sky_overnight_low_temperature_1
+      forecast_temperature_max: sensor.dark_sky_daytime_high_temperature_1
+      forecast_precip_probability: sensor.dark_sky_precip_probability_1
+      forecast_precip_type: sensor.dark_sky_precip_1
+
+layout:
+    - label (2x1), gate_camera(5x4), clock_widget(2x1)
+    - myweather (2x2), commute, alarm
+    - gate (1x1), exit_light
+    - light_open_field, leds_open_field, light_livingroom_wall, light_livingroom_projectors
+    - light_kitchen, light_livingroom, light_outdoor_front, light_outdoor_pool, light_parents, light_upper_floor_ways, light_upper_floor_rooms, light_upper_floor, light_all
